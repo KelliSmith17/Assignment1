@@ -24,6 +24,8 @@ def find_differences(reference, read):
             #code abive ensures sequences are compared in uppercase
             results.append([i, read.id, base, read[i].upper()])#bases will be recorded as uppercase
             #results will show location of the base mismatch, the bases, and read id of the sequence harbouring the mismatch,
+    if len(reference.seq) != len(read.seq): #ValueError will be raised if read and reference length do not match
+        raise ValueError("length of read sequence and reference sequence must match")
     return(results) #ends execution of the function
 
 if __name__ == "__main__": #when reading the source file, "__main__" will be assigned as __name__ variable
