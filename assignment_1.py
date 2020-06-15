@@ -2,6 +2,7 @@
 import argparse
 import sys
 from Bio import SeqIO
+import warnings
 
 parser = argparse.ArgumentParser(
     description = "Convert fastq sequencing reads to fasta and generate a .vcf file which records positions of bases in reads that do not match the corresponding position in the reference sequence."
@@ -22,7 +23,10 @@ def find_differences(reference, read):
     for i, base in enumerate(reference):
         if base.upper() != read[i].upper():#finding bases in reads that do not match base of reference at the corresponding position
             #code abive ensures sequences are compared in uppercase
-            results.append([i, read.id, base, read[i].upper()])#bases will be recorded as uppercase
+            if (base.upper() != "N") and (read[i].upper() != "N"): #results will be appended as usual if no N bases
+                    results.append([i, read.id, base, read[i].upper()])#bases will be recorded as uppercase
+            else: 
+                    warnings.warn("skipping base {} of read {} because of N's".format(i+1, read.id), stacklevel = 3) #warning will be printed if N's present
             #results will show location of the base mismatch, the bases, and read id of the sequence harbouring the mismatch,
     if len(reference.seq) != len(read.seq): #ValueError will be raised if read and reference length do not match
         raise ValueError("length of read sequence and reference sequence must match")
