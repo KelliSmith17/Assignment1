@@ -29,7 +29,11 @@ if __name__ == "__main__": #when reading the source file, "__main__" will be ass
     #assigning files to be used in the function above
     args = parser.parse_args()
     reads = SeqIO.parse(args.reads, "fastq")
-    ref = SeqIO.read(args.reference, "fasta")
+    try:
+        ref = SeqIO.read(args.reference, "fasta")
+    except ValueError:
+        print("Reference sequence must be in FASTA format")
+        sys.exit(1) #ValueError will be raised if reference sequence is not in correct format.   
     differences = list() #empty list created to append results.
     for read in reads:
         differences += find_differences(ref, read) # a list of a list is created to avoid nesting of results
