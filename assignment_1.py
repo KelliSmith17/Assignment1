@@ -20,8 +20,9 @@ def find_differences(reference, read):
     results = list() #empty list is created to append results of following code
     #if bases in the read sequence do not match the reference genome, location and base changes will be recorded
     for i, base in enumerate(reference):
-        if base != read[i]:#finding bases in reads that do not match base of reference at the corresponding position
-            results.append([i, read.id, base, read[i]])
+        if base.upper() != read[i].upper():#finding bases in reads that do not match base of reference at the corresponding position
+            #code abive ensures sequences are compared in uppercase
+            results.append([i, read.id, base, read[i].upper()])#bases will be recorded as uppercase
             #results will show location of the base mismatch, the bases, and read id of the sequence harbouring the mismatch,
     return(results) #ends execution of the function
 
