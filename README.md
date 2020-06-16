@@ -3,6 +3,12 @@ Code for Special Topic assignment 1
 
 assignment_1.py can be used to assess base differences between a reference genome and aligned sequencing reads. The sequence name, variation location, and base changes will be recorded. 
 
+## Prerequisites 
+
+`Biopython` is required to run the software. 
+
+The `pytest` module is required to run the set of tests that come with the software. 
+
 ## Usage:
 
 assignment_1.py can be called from command line using the following script:
