@@ -1,4 +1,4 @@
-from assignment_2 import find_differences
+from assignment_1 import find_differences
 from Bio import SeqIO
 import warnings
 import pytest
